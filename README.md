@@ -1,5 +1,5 @@
 # Firebase Chat
 
 ## TODOs
-[ ] Firebase authentication integration
-[ ] Firebase realtime database integration 
+- [ ] Firebase authentication integration
+- [ ] Firebase realtime database integration 
