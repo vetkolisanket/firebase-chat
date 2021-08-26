@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
-    android:padding="8dp">
+    android:padding="8dp"
+    tools:context=".LoginActivity">
 
     <EditText
         android:id="@+id/etPhoneNo"
@@ -14,7 +14,7 @@
         android:gravity="center"
         android:hint="@string/enter_your_mobile_no"
         android:inputType="phone"
-        android:maxLength="10"
+        android:maxLength="13"
         app:layout_constraintBottom_toTopOf="@+id/etOtp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -29,16 +29,20 @@
         android:gravity="center"
         android:hint="@string/enter_otp_here"
         android:inputType="phone"
+        android:maxLength="6"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/btnSendOtp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPhoneNo" />
+        app:layout_constraintTop_toBottomOf="@+id/etPhoneNo"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/btnSendOtp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:enabled="false"
         android:text="@string/send_otp"
         app:layout_constraintBottom_toTopOf="@+id/btnVerifyOtp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,11 +54,14 @@
         android:id="@+id/btnVerifyOtp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:enabled="false"
         android:text="@string/verify_otp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSendOtp" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSendOtp"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
