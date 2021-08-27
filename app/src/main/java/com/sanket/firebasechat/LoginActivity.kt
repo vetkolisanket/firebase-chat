@@ -51,6 +51,10 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        if (auth.currentUser != null) {
+            openActivity<AddProfileActivity>()
+            finish()
+        }
         initViews()
         initClickListeners()
     }

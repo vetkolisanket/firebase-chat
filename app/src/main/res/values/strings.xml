@@ -4,4 +4,6 @@
     <string name="enter_otp_here">Enter otp here</string>
     <string name="send_otp">Send otp</string>
     <string name="verify_otp">Verify OTP</string>
+    <string name="name_colon">Name:</string>
+    <string name="name">Name</string>
 </resources>
