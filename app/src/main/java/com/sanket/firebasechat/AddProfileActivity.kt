@@ -17,8 +17,8 @@ class AddProfileActivity : AppCompatActivity() {
         )
     }
     private val usersDbRef by lazy {
-        FirebaseDatabase.getInstance("https://fir-chat-d008d-default-rtdb.asia-southeast1.firebasedatabase.app/")
-            .getReference("users")
+        FirebaseDatabase.getInstance(Constants.Companion.Api.FIREBASE_DB_REFERENCE)
+            .getReference(Constants.Companion.Api.USERS)
     }
     private val auth by lazy { FirebaseAuth.getInstance() }
 
@@ -38,8 +38,8 @@ class AddProfileActivity : AppCompatActivity() {
                 val name = binding.etName.text.toString().trim()
                 if (name.isNotBlank()) {
                     auth.uid?.let { uid ->
-                        usersDbRef.child(uid).setValue(User(name))
-                        Toast.makeText(this, "Name added to db", Toast.LENGTH_SHORT).show()
+                        usersDbRef.child(uid).setValue(User(uid, name))
+                        openActivity<UserListActivity>()
                     }
                 }
             }

@@ -7,6 +7,7 @@ import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
+import com.google.firebase.database.FirebaseDatabase
 import com.sanket.firebasechat.databinding.ActivityLoginBinding
 import java.util.concurrent.TimeUnit
 
@@ -15,6 +16,10 @@ class LoginActivity : AppCompatActivity() {
     private val binding: ActivityLoginBinding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
     private val auth by lazy { FirebaseAuth.getInstance() }
     private lateinit var verificationId: String
+    private val usersDbRef by lazy {
+        FirebaseDatabase.getInstance(Constants.Companion.Api.FIREBASE_DB_REFERENCE)
+            .getReference(Constants.Companion.Api.USERS)
+    }
     private val callbacks by lazy {
         object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
@@ -52,8 +57,14 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         if (auth.currentUser != null) {
-            openActivity<AddProfileActivity>()
-            finish()
+            usersDbRef.child(auth.uid!!).get().addOnSuccessListener {
+                if (it.exists()) {
+                    openActivity<UserListActivity>()
+                } else {
+                    openActivity<AddProfileActivity>()
+                }
+                finish()
+            }
         }
         initViews()
         initClickListeners()
@@ -87,7 +98,12 @@ class LoginActivity : AppCompatActivity() {
                 PhoneAuthProvider.verifyPhoneNumber(options)
             }
             btnVerifyOtp.setOnClickListener {
-                signInWithPhoneAuthCredential(PhoneAuthProvider.getCredential(verificationId, etOtp.text.toString()))
+                signInWithPhoneAuthCredential(
+                    PhoneAuthProvider.getCredential(
+                        verificationId,
+                        etOtp.text.toString()
+                    )
+                )
             }
         }
     }
