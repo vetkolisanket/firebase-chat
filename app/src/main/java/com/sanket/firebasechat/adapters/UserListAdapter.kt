@@ -1,0 +1,33 @@
+package com.sanket.firebasechat.adapters
+
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.sanket.firebasechat.databinding.ItemUserBinding
+import com.sanket.firebasechat.models.User
+
+class UserListAdapter: RecyclerView.Adapter<UserListAdapter.UserListViewHolder>() {
+
+    private val users = mutableListOf<User>()
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserListViewHolder {
+        val binding = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return UserListViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: UserListViewHolder, position: Int) {
+        holder.bind()
+    }
+
+    override fun getItemCount() = users.size
+
+    fun add(user: User) {
+        users.add(user)
+    }
+
+    inner class UserListViewHolder(val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind() {
+            binding.tvName.text = users[adapterPosition].name
+        }
+    }
+}
