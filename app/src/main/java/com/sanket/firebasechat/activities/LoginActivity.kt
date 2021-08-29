@@ -58,6 +58,12 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        takeUserToAppropriateActivity()
+        initViews()
+        initClickListeners()
+    }
+
+    private fun takeUserToAppropriateActivity() {
         if (auth.currentUser != null) {
             usersDbRef.child(auth.uid!!).get().addOnSuccessListener {
                 if (it.exists()) {
@@ -68,8 +74,6 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             }
         }
-        initViews()
-        initClickListeners()
     }
 
     private fun initViews() {
@@ -115,6 +119,7 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
+                    takeUserToAppropriateActivity()
                 } else {
                     Toast.makeText(this, "Failure ${task.exception?.message}", Toast.LENGTH_SHORT)
                         .show()

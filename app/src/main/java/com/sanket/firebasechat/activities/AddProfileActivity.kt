@@ -44,6 +44,7 @@ class AddProfileActivity : AppCompatActivity() {
                     auth.uid?.let { uid ->
                         usersDbRef.child(uid).setValue(User(uid, name))
                         openActivity<UserListActivity>()
+                        finish()
                     }
                 }
             }
