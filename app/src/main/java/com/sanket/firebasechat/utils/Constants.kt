@@ -1,4 +1,4 @@
-package com.sanket.firebasechat
+package com.sanket.firebasechat.utils
 
 class Constants {
 

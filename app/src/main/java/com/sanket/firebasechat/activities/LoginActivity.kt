@@ -1,4 +1,4 @@
-package com.sanket.firebasechat
+package com.sanket.firebasechat.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +9,8 @@ import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
 import com.google.firebase.database.FirebaseDatabase
 import com.sanket.firebasechat.databinding.ActivityLoginBinding
+import com.sanket.firebasechat.utils.Constants
+import com.sanket.firebasechat.utils.openActivity
 import java.util.concurrent.TimeUnit
 
 class LoginActivity : AppCompatActivity() {

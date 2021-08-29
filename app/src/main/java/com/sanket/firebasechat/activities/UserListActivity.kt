@@ -1,7 +1,8 @@
-package com.sanket.firebasechat
+package com.sanket.firebasechat.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.sanket.firebasechat.R
 
 class UserListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

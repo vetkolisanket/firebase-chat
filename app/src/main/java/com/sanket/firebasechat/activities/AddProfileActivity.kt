@@ -1,4 +1,4 @@
-package com.sanket.firebasechat
+package com.sanket.firebasechat.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,7 +7,11 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.sanket.firebasechat.R
 import com.sanket.firebasechat.databinding.ActivityAddProfileBinding
+import com.sanket.firebasechat.models.User
+import com.sanket.firebasechat.utils.Constants
+import com.sanket.firebasechat.utils.openActivity
 
 class AddProfileActivity : AppCompatActivity() {
 

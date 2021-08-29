@@ -1,10 +1,12 @@
-package com.sanket.firebasechat
+package com.sanket.firebasechat.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.sanket.firebasechat.databinding.ActivitySplashBinding
+import com.sanket.firebasechat.utils.Constants
+import com.sanket.firebasechat.utils.openActivity
 
 class SplashActivity : AppCompatActivity() {
 

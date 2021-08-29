@@ -1,4 +1,4 @@
-package com.sanket.firebasechat
+package com.sanket.firebasechat.models
 
 data class User(
     val id: String,
