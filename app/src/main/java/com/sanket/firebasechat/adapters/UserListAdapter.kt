@@ -5,10 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sanket.firebasechat.databinding.ItemUserBinding
 import com.sanket.firebasechat.models.User
+import com.sanket.firebasechat.utils.IItemClickListener
 
-class UserListAdapter: RecyclerView.Adapter<UserListAdapter.UserListViewHolder>() {
+class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserListViewHolder>() {
 
     private val users = mutableListOf<User>()
+    lateinit var itemClickListener: IItemClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserListViewHolder {
         val binding = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -25,7 +27,20 @@ class UserListAdapter: RecyclerView.Adapter<UserListAdapter.UserListViewHolder>(
         users.add(user)
     }
 
-    inner class UserListViewHolder(val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class UserListViewHolder(val binding: ItemUserBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.userContainer.setOnClickListener {
+                itemClickListener.onItemClick(
+                    users[adapterPosition],
+                    binding.userContainer,
+                    this,
+                    adapterPosition
+                )
+            }
+        }
+
         fun bind() {
             binding.tvName.text = users[adapterPosition].name
         }

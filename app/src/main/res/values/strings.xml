@@ -8,4 +8,6 @@
     <string name="name">Name</string>
     <string name="submit">Submit</string>
     <string name="logout">Logout</string>
+    <string name="send">Send</string>
+    <string name="enter_message_here">Enter message here</string>
 </resources>

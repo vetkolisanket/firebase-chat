@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -15,6 +17,7 @@ import com.sanket.firebasechat.adapters.UserListAdapter
 import com.sanket.firebasechat.databinding.ActivityUserListBinding
 import com.sanket.firebasechat.models.User
 import com.sanket.firebasechat.utils.Constants
+import com.sanket.firebasechat.utils.IItemClickListener
 import com.sanket.firebasechat.utils.openActivity
 
 class UserListActivity : AppCompatActivity() {
@@ -30,8 +33,12 @@ class UserListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        initRecyclerView()
+        initViews()
         fetchUsers()
+    }
+
+    private fun initViews() {
+        initRecyclerView()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -76,6 +83,20 @@ class UserListActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerView() {
+        adapter.itemClickListener = object : IItemClickListener {
+            override fun onItemClick(
+                item: Any,
+                view: View,
+                viewHolder: RecyclerView.ViewHolder,
+                position: Int,
+                bundle: Bundle?
+            ) {
+                when (view.id) {
+                    R.id.userContainer -> openActivity<UserChatActivity>()
+                }
+            }
+
+        }
         binding.rvUsers.apply {
             this.adapter = this@UserListActivity.adapter
             layoutManager = LinearLayoutManager(this@UserListActivity)
