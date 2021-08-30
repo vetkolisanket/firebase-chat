@@ -7,7 +7,7 @@
 - [x] Firebase realtime database integration 
 - [ ] Authentication rules 30-08-21
 - [x] Add splash screen and move redirection logic to it
-- [ ] Show list of users 29-08-21
+- [x] Show list of users 29-08-21
 - [ ] Upload profile pic to firebase storage
 - [ ] Provide option to logout 30-08-21
 - [ ] User Chat Activity 31-08-21

@@ -2,6 +2,8 @@ package com.sanket.firebasechat.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -13,6 +15,7 @@ import com.sanket.firebasechat.adapters.UserListAdapter
 import com.sanket.firebasechat.databinding.ActivityUserListBinding
 import com.sanket.firebasechat.models.User
 import com.sanket.firebasechat.utils.Constants
+import com.sanket.firebasechat.utils.openActivity
 
 class UserListActivity : AppCompatActivity() {
 
@@ -29,6 +32,24 @@ class UserListActivity : AppCompatActivity() {
         setContentView(binding.root)
         initRecyclerView()
         fetchUsers()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_user_list, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_logout -> logoutUser()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun logoutUser() {
+        auth.signOut()
+        openActivity<SplashActivity>()
+        finish()
     }
 
     private fun fetchUsers() {
