@@ -92,7 +92,9 @@ class UserListActivity : AppCompatActivity() {
                 bundle: Bundle?
             ) {
                 when (view.id) {
-                    R.id.userContainer -> openActivity<UserChatActivity>()
+                    R.id.userContainer -> openActivity<UserChatActivity>() {
+                        putExtra(Constants.BUNDLE_KEYS.USER, item as User)
+                    }
                 }
             }
 
