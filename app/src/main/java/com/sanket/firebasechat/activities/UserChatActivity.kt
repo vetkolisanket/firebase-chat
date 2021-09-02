@@ -24,7 +24,7 @@ class UserChatActivity : AppCompatActivity() {
             .getReference(Constants.Companion.Api.MESSAGES)
     }
     private val auth by lazy { FirebaseAuth.getInstance() }
-    private val adapter by lazy { MessageListAdapter() }
+    private val adapter by lazy { MessageListAdapter(user) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +68,7 @@ class UserChatActivity : AppCompatActivity() {
     }
 
     private fun sendMessage(message: String) {
-        val msg = Message(message, user.id, auth.uid!!)
+        val msg = Message(message, auth.uid!!, user.id)
         val key = getKey(user.id, auth.uid!!)
         messagesDbRef.child(key).push().setValue(msg)
     }
