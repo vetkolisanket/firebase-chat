@@ -4,10 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.sanket.firebasechat.R
 import com.sanket.firebasechat.adapters.MessageListAdapter
 import com.sanket.firebasechat.databinding.ActivityUserChatBinding
@@ -25,6 +22,31 @@ class UserChatActivity : AppCompatActivity() {
     }
     private val auth by lazy { FirebaseAuth.getInstance() }
     private val adapter by lazy { MessageListAdapter(user) }
+    private val childEventListener = object : ChildEventListener {
+        override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+            val message = snapshot.getValue(Message::class.java)
+            message?.let {
+                adapter.add(it)
+                adapter.notifyItemInserted(adapter.itemCount-1)
+            }
+        }
+
+        override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+
+        }
+
+        override fun onChildRemoved(snapshot: DataSnapshot) {
+
+        }
+
+        override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+
+        }
+
+        override fun onCancelled(error: DatabaseError) {
+
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +57,7 @@ class UserChatActivity : AppCompatActivity() {
 
     private fun getMessages() {
         val key = getKey(user.id, auth.uid!!)
-        messagesDbRef.child(key).addValueEventListener(object : ValueEventListener{
+        /*messagesDbRef.child(key).addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach { childSnapShot ->
                     val message = childSnapShot.getValue(Message::class.java)
@@ -44,12 +66,14 @@ class UserChatActivity : AppCompatActivity() {
                     }
                 }
                 adapter.notifyDataSetChanged()
+                messagesDbRef.child(key).removeEventListener(this)
             }
 
             override fun onCancelled(error: DatabaseError) {
                 // TODO: 01/09/21 hide progress
             }
-        })
+        })*/
+        messagesDbRef.child(key).addChildEventListener(childEventListener)
     }
 
     private fun initViews() {
@@ -58,6 +82,8 @@ class UserChatActivity : AppCompatActivity() {
             btnSend.setOnClickListener {
                 if (etChat.text.isNotBlank()) {
                     sendMessage(etChat.text.toString())
+                    etChat.setText("")
+                    etChat.clearFocus()
                 }
             }
             rvMessages.apply {

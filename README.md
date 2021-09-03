@@ -11,5 +11,11 @@
 - [ ] Upload profile pic to firebase storage
 - [x] Provide option to logout 30-08-21
 - [x] User Chat Activity 31-08-21
-- [ ] Implement two way chat 01-09-21
+- [x] Implement two way chat 01-09-21
 - [ ] Extract firebase functions into firebase utils
+
+## Bugs
+
+## Improvements
+- [ ] Chat bubbles for both side users 04-09-21
+- [ ] Load all messages in the beginning and later on only load new messages 03-09-21
