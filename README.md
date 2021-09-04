@@ -15,7 +15,8 @@
 - [ ] Extract firebase functions into firebase utils
 
 ## Bugs
+- [ ] Sometimes the splash screen doesn't proceed to the next screen
 
 ## Improvements
 - [ ] Chat bubbles for both side users 04-09-21
-- [ ] Load all messages in the beginning and later on only load new messages 03-09-21
+- [x] Load all messages in the beginning and later on only load new messages 03-09-21
