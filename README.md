@@ -20,3 +20,4 @@
 ## Improvements
 - [ ] Chat bubbles for both side users 04-09-21
 - [x] Load all messages in the beginning and later on only load new messages 03-09-21
+- [ ] Add other ways to login
