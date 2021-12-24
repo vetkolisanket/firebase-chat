@@ -13,6 +13,7 @@
 - [x] User Chat Activity 31-08-21
 - [x] Implement two way chat 01-09-21
 - [ ] Extract firebase functions into firebase utils
+- [ ] Use await with coroutines instead of callback
 
 ## Bugs
 - [ ] Sometimes the splash screen doesn't proceed to the next screen
